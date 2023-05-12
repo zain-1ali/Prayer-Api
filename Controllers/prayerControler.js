@@ -31,11 +31,16 @@ const getPrayerByDate = async (req, res) => {
 
     try {
         const response = await axios.get(timingsUrl)
-        const { Fajr, Dhuhr, Asr, Maghrib, Isha } = response.data.data.timings
-        const data = { Fajr, Dhuhr, Asr, Maghrib, Isha }
+        const { Fajr, Dhuhr, Asr, Maghrib, Isha, Sunrise } = response.data.data.timings
+        const data = { Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha }
+
+        // const { Fajr, Dhuhr, Asr, Maghrib, Isha } = response.data.data.timings
+        const data2 = { Fajr, Dhuhr, Asr, Maghrib, Isha }
+
 
         data.currentPrayer = getCurrentPrayer(currentTime, data, date)
-        data.nextPrayer = getNextPrayer(currentTime, data, date)
+
+        data.nextPrayer = getNextPrayer(currentTime, data2, date)
 
         res.status(200).json(data)
     } catch (error) {
