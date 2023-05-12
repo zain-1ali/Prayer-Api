@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 
-router.get('/prayerTimes', prayerTimer)
+router.post('/prayerTimes', prayerTimer)
 
 
 module.exports = router;
