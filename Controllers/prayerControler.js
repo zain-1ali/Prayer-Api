@@ -7,7 +7,7 @@ const {
 } = require('../services/prayerService')
 
 const getPrayerByDate = async (req, res) => {
-    const { latitude, longitude } = req.body
+    const { latitude, longitude, method } = req.body
     let { date } = req.body
 
     if (!latitude) {
@@ -27,7 +27,7 @@ const getPrayerByDate = async (req, res) => {
     const todayDate = getTodayDate(date)
     const currentTime = getCurrentTime(date)
 
-    const timingsUrl = `http://api.aladhan.com/v1/timings/${todayDate}?latitude=${latitude}&longitude=${longitude}&method=3&school=1`
+    const timingsUrl = `http://api.aladhan.com/v1/timings/${todayDate}?latitude=${latitude}&longitude=${longitude}&method=${method}&school=1`
 
     try {
         const response = await axios.get(timingsUrl)
